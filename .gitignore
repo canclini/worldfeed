@@ -3,3 +3,4 @@ derby.log
 */metastore_db/
 */.ipynb_checkpoints
 checkpoints
+node_modules
