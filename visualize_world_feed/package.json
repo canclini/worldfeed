@@ -1,0 +1,11 @@
+{
+  "name": "spark-streaming",
+  "version": "0.0.1",
+  "description": "spark streaming app",
+  "dependencies": {
+    "express": "^4.15.3",
+    "kafka-node": "^1.6.2",
+    "socket.io": "^2.0.1",
+    "node-uuid": "^1.4.8"
+  }
+}

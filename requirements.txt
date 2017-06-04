@@ -1,3 +1,4 @@
 satori-rtm-sdk
 kafka-python
-flask
+maxminddb-geolite2
+langid

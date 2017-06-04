@@ -23,7 +23,7 @@ the visualisation part is done in node.js. So you need node.js and npm installed
 Run `npm install` in the visualize directory to install the dependencies.
 
 ### jupyter
-You need a jupyter server running.
+You need a jupyter server running with a pyspark kernel. make sure that the kafka package is loaded. `--packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.1.1`
 
 ## run the code
 1. run kafka and make sure to have a topic named `satori-bike` and a topic named `aggr-bike`. (see commands below)
