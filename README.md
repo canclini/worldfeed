@@ -4,6 +4,9 @@
 The idea is to consume the [bike sharing](https://www.satori.com/channels/US-Bike-Sharing-Channel) stream from [Satori](https://www.satori.com/) with Spark Structured Streaming.
 The streamed data will be aggregated with spark and visualized with a node.js app.
 
+## system architecture
+![System Architecture Data Streaming](documentation/SystemArchitectureDataStreaming.png?raw=true)
+
 ## setup
 
 ### Kafka
