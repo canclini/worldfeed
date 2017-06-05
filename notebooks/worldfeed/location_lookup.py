@@ -26,14 +26,14 @@ def get_location_from_ip(ip):
 
 def get_country_from_url(url):
     try:
-        location = get_location_from_ip (
-        get_ip_from_hostname(
-            extract_hostname(url)
-            )
-        )
-        country_iso_code = location['country']['iso_code']
+        hostname = urlparse(url)[1]
+        ip = socket.gethostbyname(hostname)
+        result = geolite2.reader().get(ip)
+        country_iso_code = result['country']['iso_code']
     except:
-        country_iso_code = None
+        country_iso_code = "unknown"
+    finally:
+        geolite2.close()
     return country_iso_code
 
 
