@@ -1,4 +1,6 @@
-var app = require('express')();
+var express = require('express');
+var app = express();
+var path = require('path');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var kafka = require('kafka-node');
@@ -12,8 +14,9 @@ var consumer = new HighLevelConsumer(client, payloads);
 var offset = new Offset(client);
 var port = 3001;
 
+app.use('/public', express.static(path.join(__dirname, 'public')));
 app.get('/', function(req, res){
-    res.sendfile('index.html');
+    res.sendfile('public/index.html');
 });
 
 io = io.on('connection', function(socket){

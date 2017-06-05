@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>World Feed</title>
+    <link rel="stylesheet" type="text/css" href="public/styles.css">
+    <link rel="stylesheet" type="text/css" href="public/common.css">
+
+    <!-- Resources -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="http://fb.me/react-0.13.3.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.13.3.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+
+    <!-- Chart code -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+          var socket = io();
+            socket.on('message', function(data){
+              console.log(data)
+            });
+       });
+    </script>
+  </head>
+  <body>
+    <div id='container' style="height:500px;width:100%;font-size: 11px"></div>
+    <div id="chartdiv"></div>
+    <script type="text/jsx" src="public/script.js"></script>
+  </body>
+</html>
