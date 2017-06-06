@@ -1,31 +1,62 @@
 var WorldFeed = React.createClass({
 
     getInitialState: function(){
-        return { searchString: '' };
+        return { searchString: '', data: {} };
     },
 
     handleChange: function(e){
         this.setState({ searchString:e.target.value });
     },
 
+    pushData: function(d) {
+        var v          = JSON.parse(d);
+        start_ts       = v['start'];
+        end_ts         = v['end'];
+        server_country = v['server_country'];
+        language       = v['language'];
+        count          = v['count'];
+
+        data           = this.state.data;
+
+        if (! (start_ts in data))
+            data[start_ts] = {language: {}, country: {}};
+        if (! (server_country in data[start_ts]))
+            data[start_ts]['country'][server_country] = 0;
+        if (! (language in data[start_ts]))
+            data[start_ts]['language'][language] = 0;
+
+        data[start_ts]['country'][server_country] += count;
+        data[start_ts]['language'][language] += count;
+
+        console.log(data);
+        this.setState({data: data});
+    },
+
+    componentDidMount: function(){
+        var socket = io();
+        socket.on('message', this.pushData);
+    },
+
     render: function() {
-
-        var libraries = this.props.items,
-            searchString = this.state.searchString.trim().toLowerCase();
-
-        if (searchString.length > 0) {
-            libraries = libraries.filter(function(library) {
-                return library.name.toLowerCase().match(searchString);
-            });
-        }
-
+        var that = this;
         return <div>
-                    <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Type here" />
-                    <ul> 
-                        { libraries.map(function(l, index){
-                            return <li key={index}>{l.name} <a href={l.url}>{l.url}</a></li>
-                        }) }
-                    </ul>
+                  { Object.keys(that.state.data).map(function (key) {
+                      return <div>
+                               <h3>{key}</h3>
+                               <h4>Languages</h4>
+                               <ul>
+                                 { Object.keys(that.state.data[key]['language']).map(function (key2) {
+                                   return <li>{key2}: {that.state.data[key]['language'][key2]}</li>
+                                 }) }
+                               </ul> 
+                               <h4>Countries</h4>
+                               <ul>
+                                 { Object.keys(that.state.data[key]['country']).map(function (key2) {
+                                   return <li>{key2}: {that.state.data[key]['country'][key2]}</li>
+                                 }) }
+                               </ul> 
+                             </div>
+                  }) }
                 </div>;
 
     }
@@ -51,7 +82,8 @@ var libraries = [
 
 ];
 
-React.render(
+
+var WorldFeedInstance = React.render(
     <WorldFeed items={libraries} />,
     document.body
 );
