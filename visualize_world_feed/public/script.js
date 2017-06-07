@@ -20,9 +20,9 @@ var WorldFeed = React.createClass({
 
         if (! (start_ts in data))
             data[start_ts] = {language: {}, country: {}};
-        if (! (server_country in data[start_ts]))
+        if (! (server_country in data[start_ts]['country']))
             data[start_ts]['country'][server_country] = 0;
-        if (! (language in data[start_ts]))
+        if (! (language in data[start_ts]['language']))
             data[start_ts]['language'][language] = 0;
 
         data[start_ts]['country'][server_country] += count;
@@ -39,7 +39,12 @@ var WorldFeed = React.createClass({
 
     render: function() {
         var that = this;
+        const config = {
+          /* HighchartsConfig */
+        };
+
         return <div>
+                  <Highcharts config = {config}></Highcharts>
                   { Object.keys(that.state.data).map(function (key) {
                       return <div>
                                <h3>{key}</h3>
@@ -62,28 +67,7 @@ var WorldFeed = React.createClass({
     }
 });
 
-                                                                                                                                                             
-var libraries = [
-
-    { name: 'Backbone.js', url: 'http://documentcloud.github.io/backbone/'},
-    { name: 'AngularJS', url: 'https://angularjs.org/'},
-    { name: 'jQuery', url: 'http://jquery.com/'},
-    { name: 'Prototype', url: 'http://www.prototypejs.org/'},
-    { name: 'React', url: 'http://facebook.github.io/react/'},
-    { name: 'Ember', url: 'http://emberjs.com/'},
-    { name: 'Knockout.js', url: 'http://knockoutjs.com/'},
-    { name: 'Dojo', url: 'http://dojotoolkit.org/'},
-    { name: 'Mootools', url: 'http://mootools.net/'},
-    { name: 'Underscore', url: 'http://documentcloud.github.io/underscore/'},
-    { name: 'Lodash', url: 'http://lodash.com/'},
-    { name: 'Moment', url: 'http://momentjs.com/'},
-    { name: 'Express', url: 'http://expressjs.com/'},
-    { name: 'Koa', url: 'http://koajs.com/'},
-
-];
-
-
 var WorldFeedInstance = React.render(
-    <WorldFeed items={libraries} />,
+    <WorldFeed />,
     document.body
 );
