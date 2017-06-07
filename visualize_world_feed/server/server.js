@@ -1,6 +1,6 @@
-var express = require('express');
+var express = require("express");
+var path = require("path");
 var app = express();
-var path = require('path');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var kafka = require('kafka-node');
@@ -14,11 +14,6 @@ var consumer = new HighLevelConsumer(client, payloads);
 var offset = new Offset(client);
 var port = 3001;
 
-app.use('/public', express.static(path.join(__dirname, 'public')));
-app.get('/', function(req, res){
-    res.sendfile('public/index.html');
-});
-
 io = io.on('connection', function(socket){
     console.log('a user connected');
     socket.on('disconnect', function(){
@@ -27,10 +22,13 @@ io = io.on('connection', function(socket){
 });
 
 consumer = consumer.on('message', function(message) {
-   // console.log(message.value);
+    //console.log(message.value);
     io.emit("message", message.value);
 });
 
-http.listen(port, function(){
-    console.log("Running on port " + port)
-});
+
+app.use(express.static(path.join(__dirname,"../app/dist")));
+//app.listen(port,function(){
+http.listen(port, function(){  
+    console.log("Started listening on port", port);
+})

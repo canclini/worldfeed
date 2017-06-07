@@ -1,0 +1,20 @@
+{
+  "name": "visualize_world_feed_2",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Philip Kurmann <philip.kurmann@peaq.ch>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/canclini/bikesharing",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-css": "^3.3.7"
+  }
+}

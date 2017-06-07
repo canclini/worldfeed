@@ -1,5 +1,9 @@
-var WorldFeed = React.createClass({
+var React = require("react");
+const io = require('socket.io-client')  
+const socket = io()  
 
+
+module.exports = React.createClass({
     getInitialState: function(){
         return { searchString: '', data: {} };
     },
@@ -28,12 +32,10 @@ var WorldFeed = React.createClass({
         data[start_ts]['country'][server_country] += count;
         data[start_ts]['language'][language] += count;
 
-        console.log(data);
         this.setState({data: data});
     },
 
     componentDidMount: function(){
-        var socket = io();
         socket.on('message', this.pushData);
     },
 
@@ -44,7 +46,7 @@ var WorldFeed = React.createClass({
         };
 
         return <div>
-                  <Highcharts config = {config}></Highcharts>
+                  <h1>Hello</h1>
                   { Object.keys(that.state.data).map(function (key) {
                       return <div>
                                <h3>{key}</h3>
@@ -66,8 +68,3 @@ var WorldFeed = React.createClass({
 
     }
 });
-
-var WorldFeedInstance = React.render(
-    <WorldFeed />,
-    document.body
-);
