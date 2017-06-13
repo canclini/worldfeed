@@ -86,10 +86,14 @@ module.exports = React.createClass({
         timestamps = Object.keys(that.state.data)
         var language_config = {
           title: {text: 'Languages'},
+          chart: {
+            type: 'area'
+          },
           plotOptions: {
-              line: {
-                  animation: false
-              }
+            area: {
+              animation: false,
+              stacking: 'normal'
+            }
           },
           xAxis: {
             categories: timestamps,
@@ -99,10 +103,14 @@ module.exports = React.createClass({
         };
         var country_config = {
           title: {text: 'Countries'},
+          chart: {
+            type: 'area'
+          },
           plotOptions: {
-              line: {
-                  animation: false
-              }
+            area: {
+              animation: false,
+              stacking: 'normal'
+            }
           },
           xAxis: {
             categories: timestamps,
