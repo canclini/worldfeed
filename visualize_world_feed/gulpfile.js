@@ -18,6 +18,15 @@ gulp.task("copy", ["bundle"], function () {
         .pipe(gulp.dest("app/dist"));
 });
 
-gulp.task("default",["copy"],function(){
+/**
+ * The default task that is run with the
+ * gulp command when not task is specified.
+ * The scss task is required to run before
+ * this one.
+ *
+ * Watch for changes in the JSX-Files
+ */
+gulp.task('default', ['copy'], function() {
    console.log("Gulp completed..."); 
+   gulp.watch(['./app/main.jsx', './app/components/*'], ['copy']);
 });
