@@ -84,6 +84,7 @@ module.exports = React.createClass({
                               });
         /* HighchartsConfig */
         timestamps = Object.keys(that.state.data)
+
         var language_config = {
           title: {text: 'Languages'},
           chart: {
@@ -101,6 +102,7 @@ module.exports = React.createClass({
           },
           series: language_series
         };
+
         var country_config = {
           title: {text: 'Countries'},
           chart: {
@@ -122,23 +124,6 @@ module.exports = React.createClass({
         return <div>
                   <ReactHighcharts config={language_config} />
                   <ReactHighcharts config={country_config} />
-                  { Object.keys(that.state.data).map(function (timestamp) {
-                      return <div>
-                               <h3>{timestamp}</h3>
-                               <h4>Languages</h4>
-                               <ul>
-                                 { Object.keys(that.state.data[timestamp]['language']).map(function (language) {
-                                   return <li>{language}: {that.state.data[timestamp]['language'][language]}</li>
-                                 }) }
-                               </ul> 
-                               <h4>Countries</h4>
-                               <ul>
-                                 { Object.keys(that.state.data[timestamp]['country']).map(function (country) {
-                                   return <li>{country}: {that.state.data[timestamp]['country'][country]}</li>
-                                 }) }
-                               </ul> 
-                             </div>
-                  }) }
                 </div>;
 
     }
