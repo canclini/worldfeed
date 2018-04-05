@@ -9,9 +9,9 @@ Spark streaming is then used to read from the topic into a streaming dataframe w
 1. Country of the server the message is comming from
 2. The language of the message
 
-The stream aggregates the message count by a 15 minute time window, the country_code and the language. All updates are written every 5 seconds into a second kafka topic *enriched-feed*.
+The stream aggregates the message count by a 15 minute time window, the `country_code` and the language. All updates are written every 5 seconds into a second kafka topic *enriched-feed*.
 
-The visualisation is done with a [node.js](https://nodejs.org) app consuming the kafka topic and sending the message via websockets to all connected browsers where a React](https://facebook.github.io/react/) app is handling the update of [highcharts](https://www.highcharts.com/).
+The visualisation is done with a [node.js](https://nodejs.org) app consuming the kafka topic and sending the message via websockets to all connected browsers where a [React](https://facebook.github.io/react/) app is handling the update of [highcharts](https://www.highcharts.com/).
 
 ## system architecture
 ![System Architecture Data Streaming](documentation/SystemArchitectureDataStreaming.png?raw=true)
